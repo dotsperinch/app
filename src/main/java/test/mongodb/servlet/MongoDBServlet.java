@@ -49,13 +49,13 @@ public class MongoDBServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-	String host = System.getenv("OPENSHIFT_NOSQL_DB_HOST");
-        String sport = System.getenv("OPENSHIFT_NOSQL_DB_PORT");
-        String db = System.getenv("OPENSHIFT_GEAR_NAME");
+	String host = System.getenv("OPENSHIFT_MONGODB_DB_HOST");
+        String sport = System.getenv("OPENSHIFT_MONGODB_DB_PORT");
+        String db = System.getenv("OPENSHIFT_APP_NAME");
         if(db == null)
             db = "mydb";
-        String user = System.getenv("OPENSHIFT_NOSQL_DB_USERNAME");
-        String password = System.getenv("OPENSHIFT_NOSQL_DB_PASSWORD");
+        String user = System.getenv("OPENSHIFT_MONGODB_DB_USERNAME");
+        String password = System.getenv("OPENSHIFT_MONGODB_DB_PASSWORD");
         int port = Integer.decode(sport);
 
         try {
