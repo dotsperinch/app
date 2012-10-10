@@ -18,7 +18,7 @@ Create a jbossas-7 application (you can call your application whatever you want)
 
 Add MongoDB to your application
 
-    rhc app cartridge add -a testmongo -c mongodb-2.0
+    rhc app cartridge add -a testmongo -c mongodb-2.2
 
 Add this upstream repo
 
