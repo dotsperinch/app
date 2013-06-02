@@ -14,7 +14,7 @@ Create an account at http://openshift.redhat.com/
 
 Create a jbossas-7 application with mongodb (you can call your application whatever you want)
 
-    rhc app create -a testmongo -t jbossas-7 mongodb-2.2
+    rhc app create testmongo jbossas-7 mongodb-2.2
 
 Add this upstream repo
 
