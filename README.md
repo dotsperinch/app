@@ -12,13 +12,9 @@ Running on OpenShift
 
 Create an account at http://openshift.redhat.com/
 
-Create a jbossas-7 application (you can call your application whatever you want)
+Create a jbossas-7 application with mongodb (you can call your application whatever you want)
 
-    rhc app create -a testmongo -t jbossas-7
-
-Add MongoDB to your application
-
-    rhc cartridge add -a testmongo -c mongodb-2.2
+    rhc app create -a testmongo -t jbossas-7 mongodb-2.2
 
 Add this upstream repo
 
