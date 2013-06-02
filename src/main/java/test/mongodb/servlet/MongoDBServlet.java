@@ -80,6 +80,7 @@ public class MongoDBServlet extends HttpServlet {
     }
     protected void handleCmd(String cmd, HttpServletResponse response) throws IOException {
         PrintWriter pw = response.getWriter();
+        response.setContentType("text/html");
         if(cmd == null) {
             // Initialize the db with some of the tutorial objects
             tutorial(pw);
