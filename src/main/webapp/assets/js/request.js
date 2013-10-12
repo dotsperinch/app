@@ -1,0 +1,1 @@
+$.post("Loader",{"param1":"1","param2":"2"},function(data){},"json");

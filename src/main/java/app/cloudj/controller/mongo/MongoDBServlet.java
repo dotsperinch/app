@@ -1,4 +1,4 @@
-package test.mongodb.servlet;
+package app.cloudj.controller.mongo;
 /* JBoss, Home of Professional Open Source
  * Copyright 2011 Red Hat Inc. and/or its affiliates and other contributors
  * as indicated by the @authors tag. All rights reserved.
@@ -43,7 +43,9 @@ import com.mongodb.DBCursor;
  */
 @WebServlet(name = "MongoDBServlet")
 public class MongoDBServlet extends HttpServlet {
-    private Mongo mongo;
+
+	private static final long serialVersionUID = 1L;
+	private Mongo mongo;
     private DB mongoDB;
 
     @Override
@@ -99,6 +101,7 @@ public class MongoDBServlet extends HttpServlet {
             mongoDB.requestStart();
             pw.format("<h1>Tutorial Objects Added to DB</h1>\n");
             DBCollection coll = mongoDB.getCollection("testCollection");
+            
             BasicDBObject doc = new BasicDBObject();
 
             doc.put("name", "MongoDB");
