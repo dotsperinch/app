@@ -42,31 +42,26 @@ import com.mongodb.DBCursor;
  * @version $Revision:$
  */
 @WebServlet(name = "MongoDBServlet")
-public class MongoDBServlet extends HttpServlet {
+public class MongoLocal extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private Mongo mongo;
     private DB mongoDB;
+    
+    String db ="cloudj";
+    String password = "12345";
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-	String host = System.getenv("OPENSHIFT_MONGODB_DB_HOST");
-        String sport = System.getenv("OPENSHIFT_MONGODB_DB_PORT");
-        String db = System.getenv("OPENSHIFT_APP_NAME");
-        if(db == null)
-            db = "cloudj";
-        String user = System.getenv("OPENSHIFT_MONGODB_DB_USERNAME");
-        String password = System.getenv("OPENSHIFT_MONGODB_DB_PASSWORD");
-        int port = Integer.decode(sport);
 
         try {
-            mongo = new Mongo(host , port);
+            mongo = new Mongo("localhost" , 27017);
         } catch (UnknownHostException e) {
             throw new ServletException("Failed to access Mongo server", e);
         }
         mongoDB = mongo.getDB(db);
-        if(mongoDB.authenticate(user, password.toCharArray()) == false) {
+        if(mongoDB.authenticate("giuseppe", "12345".toCharArray()) == false) {
             throw new ServletException("Failed to authenticate against db: "+db);
         }
     }
