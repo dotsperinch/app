@@ -76,6 +76,7 @@ function getSongs(files) {
 //							+ jsontags.toLocaleUpperCase() + "<br/>");
 
 					process();
+					console.log(JSON.stringify(tags));
 				});
 
 				var lq = queue.length;
