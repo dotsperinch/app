@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	metadata-complete="false" version="3.0">
+	<display-name>Cloudj</display-name>
+
+	<servlet>
+		<servlet-name>mongoDB</servlet-name>
+		<servlet-class>app.cloudj.controller.mongo.MongoRemote</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mongoDB</servlet-name>
+		<url-pattern>/mongoDB</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>MongoLocal</servlet-name>
+		<servlet-class>app.cloudj.controller.mongo.MongoLocal</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MongoLocal</servlet-name>
+		<url-pattern>/MongoLocal</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>Loads mp3 metadata from filesystem and persists it.</description>
+		<display-name>Loader</display-name>
+		<servlet-name>Loader</servlet-name>
+		<servlet-class>app.cloudj.controller.Loader</servlet-class>
+		<init-param>
+			<description></description>
+			<param-name>Loader</param-name>
+			<param-value>Loader</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Loader</servlet-name>
+		<url-pattern>/Loader</url-pattern>
+	</servlet-mapping>
+</web-app>
