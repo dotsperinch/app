@@ -13,7 +13,7 @@
 		<h2>Remoto</h2>
 		<p>La servlet MongoRemote mostra l'utilizzo dei metodi di base della libreria Java per MongoDb</p>
 		
-		<a href="http://app-cloudj.rhcloud.org/MongoRemote" >Chiama MongoRemote</a>
+		<a href="http://app-cloudj.rhcloud.org/MongoRemote" target="_blank">Chiama MongoRemote</a>
 		
 		<h2>Locale</h2>
 		<p>La servlet MongoLocale riproduce lo stesso esempio di MongoRemote ma su una macchian locale in cui sia stato configurata e avviata un'istanza di MongoDb, come nella seguente procedura guidata</p>
@@ -22,5 +22,22 @@
 		
 			<li>Scaricare MongoDb da <a href="">qui</a></li>
 		</ul>
+		
+		
+		<h2>Repository</h2>
+		
+		<h3>app @ Openshift</h3>
+		<h2>app @ Github</h2>
+		<a href="https://github.com/dotsperinch/app" target="_blank">link</a>
+		
+		<p>Procedura per l'allinaemanto del repository Github con Openshift.</p>
+		
+		<ul>
+		<li>Aprire un terminale Git nella cartella del vostro repository locale Github ed eseguire</li>
+			<pre>git remote add upstream -m master ssh://5255a7fc4382ec6fc5000041@app-cloudj.rhcloud.com/~/git/app.git/ </pre>
+			<pre>git pull -s recursive -X theirs upstream master</pre>
+			<pre>git push</pre>
+		</ul>
+		
 	</body>
 </html>
