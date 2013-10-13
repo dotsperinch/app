@@ -1,4 +1,5 @@
 package app.cloudj.controller.mongo;
+
 /* JBoss, Home of Professional Open Source
  * Copyright 2011 Red Hat Inc. and/or its affiliates and other contributors
  * as indicated by the @authors tag. All rights reserved.
@@ -46,102 +47,111 @@ public class MongoLocal extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private Mongo mongo;
-    private DB mongoDB;
-    String db ="cloudj";
+	private DB mongoDB;
+	String db = "cloudj";
 
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
 
-        try {
-            mongo = new Mongo("127.0.0.1" , 27017);
-        } catch (UnknownHostException e) {
-            throw new ServletException("Failed to access Mongo server", e);
-        }
-        mongoDB = mongo.getDB(db);
-//        String username = "admin";
-//        String password = "12345";
-//		if(mongoDB.authenticate(username , password.toCharArray()) == false) {
-//            throw new ServletException("Failed to authenticate against db: "+db);
-//        }
-    }
+		try {
+			mongo = new Mongo("127.0.0.1", 27017);
+		} catch (UnknownHostException e) {
+			throw new ServletException("Failed to access Mongo server", e);
+		}
+		mongoDB = mongo.getDB(db);
+		// String username = "admin";
+		// String password = "12345";
+		// if(mongoDB.authenticate(username , password.toCharArray()) == false)
+		// {
+		// throw new ServletException("Failed to authenticate against db: "+db);
+		// }
+	}
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String cmd = request.getParameter("cmd");
-        handleCmd(cmd, response);
-    }
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String cmd = request.getParameter("cmd");
+		handleCmd(cmd, response);
+	}
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String cmd = request.getParameter("cmd");
-        handleCmd(cmd, response);
-    }
-    protected void handleCmd(String cmd, HttpServletResponse response) throws IOException {
-        PrintWriter pw = response.getWriter();
-        response.setContentType("text/html");
-        if(cmd == null) {
-            // Initialize the db with some of the tutorial objects
-            tutorial(pw);
-        }
-        else if(cmd.equalsIgnoreCase("query")) {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String cmd = request.getParameter("cmd");
+		handleCmd(cmd, response);
+	}
 
-        }
-        else {
-            pw.format("<h1>Error, on %s</h1>\nNo support for handling the command exists yet", cmd);
-        }
-        pw.flush();
-    }
+	protected void handleCmd(String cmd, HttpServletResponse response)
+			throws IOException {
+		PrintWriter pw = response.getWriter();
+		response.setContentType("text/html");
+		if (cmd == null) {
+			// Initialize the db with some of the tutorial objects
+			tutorial(pw);
+		} else if (cmd.equalsIgnoreCase("query")) {
 
-    protected void tutorial(PrintWriter pw) {
-        try {
-            mongoDB.requestStart();
-            pw.format("<h1>Tutorial Objects Added to DB</h1>\n");
-            DBCollection coll = mongoDB.getCollection("testCollection");
-            
-            BasicDBObject doc = new BasicDBObject();
+		} else {
+			pw.format(
+					"<h1>Error, on %s</h1>\nNo support for handling the command exists yet",
+					cmd);
+		}
+		pw.flush();
+	}
 
-            doc.put("name", "MongoDB");
-            doc.put("type", "database");
-            doc.put("count", 1);
+	protected void tutorial(PrintWriter pw) {
+		try {
+			mongoDB.requestStart();
+			pw.format("<h1>Tutorial Objects Added to DB</h1>\n");
+			DBCollection coll = mongoDB.getCollection("testCollection");
 
-            BasicDBObject info = new BasicDBObject();
+			BasicDBObject doc = new BasicDBObject();
 
-            info.put("x", 203);
-            info.put("y", 102);
+			doc.put("name", "MongoDB");
+			doc.put("type", "database");
+			doc.put("count", 1);
 
-            doc.put("info", info);
+			BasicDBObject info = new BasicDBObject();
 
-            coll.insert(doc);
-            DBObject myDoc = coll.findOne();
-            pw.format("<h2>testCollection</h2><pre>%s</pre>\n", myDoc.toString());
+			info.put("x", 203);
+			info.put("y", 102);
 
-            for (int i=0; i < 100; i++) {
-                coll.insert(new BasicDBObject().append("i", i));
-            }
+			doc.put("info", info);
 
-            BasicDBObject query = new BasicDBObject();
-            query.put("i", 71);
-            DBCursor cur = coll.find(query);
-            pw.format("<h2>100 i objects, #71:</h2><pre>%s</pre>\n", cur.next());
+			coll.insert(doc);
+			DBObject myDoc = coll.findOne();
+			pw.format("<h2>testCollection</h2><pre>%s</pre>\n",
+					myDoc.toString());
 
-            coll.createIndex(new BasicDBObject("i", 1));  // create index on "i", ascending
-        } finally {
-            mongoDB.requestDone();
-        }
-    }
+			for (int i = 0; i < 100; i++) {
+				coll.insert(new BasicDBObject().append("i", i));
+			}
 
-    protected void handleQuery(PrintWriter pw, String i) {
-        try {
-            mongoDB.requestStart();
-            DBCollection coll = mongoDB.getCollection("testCollection");
-            BasicDBObject query = new BasicDBObject();
-            query.put("i", 71);
-            DBCursor cur = coll.find(query);
-            if(cur.count() == 1)
-                pw.format("<h1>>testCollection.%s result: </h2><pre>%s</pre>\n", cur.next());
-            else
-                pw.format("<h1>>testCollection.%s result</h2>No matches found!\n");
-        } finally {
-            mongoDB.requestDone();
-        }
-    }
+			BasicDBObject query = new BasicDBObject();
+			query.put("i", 71);
+			DBCursor cur = coll.find(query);
+			pw.format("<h2>100 i objects, #71:</h2><pre>%s</pre>\n", cur.next());
+
+			coll.createIndex(new BasicDBObject("i", 1)); // create index on "i",
+															// ascending
+		} finally {
+			mongoDB.requestDone();
+		}
+	}
+
+	protected void handleQuery(PrintWriter pw, String i) {
+		try {
+			mongoDB.requestStart();
+			DBCollection coll = mongoDB.getCollection("testCollection");
+			BasicDBObject query = new BasicDBObject();
+			query.put("i", 71);
+			DBCursor cur = coll.find(query);
+			if (cur.count() == 1)
+				pw.format(
+						"<h1>>testCollection.%s result: </h2><pre>%s</pre>\n",
+						cur.next());
+			else
+				pw.format("<h1>>testCollection.%s result</h2>No matches found!\n");
+		} finally {
+			mongoDB.requestDone();
+		}
+	}
 }
