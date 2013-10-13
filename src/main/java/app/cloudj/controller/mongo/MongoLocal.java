@@ -41,7 +41,7 @@ import com.mongodb.DBCursor;
  * @author Scott stark (sstark@redhat.com) (C) 2011 Red Hat Inc.
  * @version $Revision:$
  */
-@WebServlet(name = "MongoDBServlet")
+@WebServlet(name = "MongoRemote")
 public class MongoLocal extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -59,11 +59,11 @@ public class MongoLocal extends HttpServlet {
             throw new ServletException("Failed to access Mongo server", e);
         }
         mongoDB = mongo.getDB(db);
-        String username = "admin";
-        String password = "12345";
-		if(mongoDB.authenticate(username , password.toCharArray()) == false) {
-            throw new ServletException("Failed to authenticate against db: "+db);
-        }
+//        String username = "admin";
+//        String password = "12345";
+//		if(mongoDB.authenticate(username , password.toCharArray()) == false) {
+//            throw new ServletException("Failed to authenticate against db: "+db);
+//        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

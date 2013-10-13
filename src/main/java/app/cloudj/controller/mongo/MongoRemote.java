@@ -41,8 +41,8 @@ import com.mongodb.DBCursor;
  * @author Scott stark (sstark@redhat.com) (C) 2011 Red Hat Inc.
  * @version $Revision:$
  */
-@WebServlet(name = "MongoDBServlet")
-public class MongoDBServlet extends HttpServlet {
+@WebServlet(name = "MongoRemote")
+public class MongoRemote extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private Mongo mongo;

@@ -7,7 +7,7 @@
 
 	<servlet>
 		<servlet-name>mongoDB</servlet-name>
-		<servlet-class>app.cloudj.controller.mongo.MongoDBServlet</servlet-class>
+		<servlet-class>app.cloudj.controller.mongo.MongoRemote</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>mongoDB</servlet-name>
