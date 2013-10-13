@@ -6,12 +6,12 @@
 	<display-name>Cloudj</display-name>
 
 	<servlet>
-		<servlet-name>mongoDB</servlet-name>
+		<servlet-name>MongoRemote</servlet-name>
 		<servlet-class>app.cloudj.controller.mongo.MongoRemote</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>mongoDB</servlet-name>
-		<url-pattern>/mongoDB</url-pattern>
+		<servlet-name>MongoRemote</servlet-name>
+		<url-pattern>/MongoRemote</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
